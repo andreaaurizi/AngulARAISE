@@ -1,0 +1,27 @@
+<td>{{user.username}}</td>
+<td>{{user.nome}}</td>
+<td>{{user.cognome}}</td>
+<td>{{user.email}}</td>
+<td>{{user.clan}}</td>
+<td>{{user.img_profile}}</td>
+<td class="buttons">
+  <div class="row">
+    <div class="col-sm-4">
+      <button class="btn btn-primary" (click)="showUserDetail()">
+        <fa name="info" fixed="true" ></fa>
+      </button>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-primary btn-sm" (click)="updateUser()">
+        <fa name="pencil"></fa>
+      </button>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-danger  btn-sm" (click)="deleteUser()">
+        <fa name="trash-o"></fa>
+      </button>
+    </div>
+
+
+  </div>
+</td>

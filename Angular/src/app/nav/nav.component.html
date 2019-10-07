@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="#">ANGULARAISE</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse"   (click)="isCollapsed= !isCollapsed" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"  open="true"  open="true">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse" [ngbCollapse]="isCollapsed">
+    <ul class="navbar-nav mr-auto"  >
+      <li class="nav-item active">
+        <a class="nav-link" href="#" routerLink="home">Home </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#" routerLink="regolamento">Regolamento</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#" routerLink="infoclan">InfoClan</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#" routerLink="aboutapp">AboutApp</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#" routerLink="contatti">Contatti</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#" routerLink="users">USERS</a>
+      </li>
+      
+    </ul>
+
+    <li class="nav-item">
+        <a href="#" class="nav-link" routerLink="/users/new">  Registration</a>
+    </li>
+  </div>
+</nav>

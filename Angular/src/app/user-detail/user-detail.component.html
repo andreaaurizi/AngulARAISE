@@ -1,0 +1,31 @@
+<form #f ="ngForm">
+  <input type="hidden" name="id"  [(ngModel)]="user.id">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input placeholder="username" [(ngModel)]="user.username" class="form-control" name="username" id="username">
+  </div>
+  <div class="form-group">
+    <label  for="nome">Nome</label>
+    <input placeholder="nome"  [(ngModel)]="user.nome"  class="form-control"  name="nome" id="nome">
+  </div>
+  <div class="form-group">
+    <label for="cognome">Cognome</label>
+    <input  [(ngModel)]="user.cognome"  class="form-control"  name="cognome" id="cognome">
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input  [(ngModel)]="user.email"  class="form-control" type="email" name="email" id="email">
+  </div>
+  <div class="form-group">
+    <label for="clan">Clan</label>
+    <input  [(ngModel)]="user.clan"  class="form-control" name="clan" id="clan">
+  </div>
+  <div class="form-group">
+    <label   for="img_profile">Immagine</label>
+    <input  [(ngModel)]="user.img_profile"  class="form-control" type="text" name="img_profile" id="img_profile">
+  </div>
+  <div class="form-group form-footer">
+    <button class="btn btn-secondary" (click)="resetForm(f.form)">RESET</button>
+    <button class="btn btn-success" (click)="saveUser()"> SAVE</button>
+  </div>
+</form>

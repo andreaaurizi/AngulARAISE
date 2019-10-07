@@ -1,0 +1,30 @@
+<h2>{{ title }}</h2>
+<table class="table table-dark">
+  <tr>
+    <th>Username</th>
+    <td>{{User.username}}</td>
+  </tr>
+  <tr>
+    <th>Nome</th>
+    <td>{{User.nome}}</td>
+  </tr>
+  <tr>
+    <th>Cognome</th>
+    <td>{{User.cognome}}</td>
+  </tr>
+  <tr>
+    <th>Email</th>
+    <td>{{User.email}}</td>
+  </tr>
+  <tr>
+    <th>Clan</th>
+    <td>{{User.clan}}</td>
+  </tr>
+  <tr>
+    <th>Immagine</th>
+    <td>{{User.img_profile}}</td>
+  </tr>
+  <tfoot>
+  <tr> <td colspan="2"><button class="btn btn-primary" (click)="backToUsers()">BACK</button></td> </tr>
+  </tfoot>
+</table>
