@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<div id="profile">
+<title>Profilo</title>
+
+<style>
+
+.button1 {
+  background-color:#ffa500;
+  color: white;
+}
+
+.button1:hover {
+  background-color: #ffa500;
+  filter: brightness(85%);
+  color: white;
+}
+
+
+.button2 {
+  background-color:#dc143c;
+  color: white;
+}
+
+.button2:hover {
+  background-color: #dc143c;
+  filter: brightness(85%);
+  color: white;
+}
+
+</style>
+
+<body>
+<h1>Profilo di <%=   @user.username %></h1>
+
+
+
+<div id = "content">
+
+
+<%= image_tag(@user.img_profile, :style => "display: block; margin: 0px auto; width: 300px; height: 300px; cursor: pointer;", :alt => "Premi Cambia Immagine")%>
+
+<!-- Line breaks around the image.-->
+
+
+
+
+
+
+<!-- <a style="font-size:24px;" href="register" >Cambia immagine </a> -->
+
+
+
+  <dl>
+  <dd> <b>Nome:</b> &nbsp;&nbsp;&nbsp;&nbsp; <%=   @user.nome %></dd>
+
+    <dd><b>Cognome: </b> &nbsp;&nbsp;&nbsp;&nbsp; <%=   @user.cognome %></dd>
+
+    <dd><b>Email: </b> &nbsp;&nbsp;&nbsp;&nbsp;<%= @user.email %></dd>
+
+    <dd><b>Username:</b> &nbsp;&nbsp;&nbsp;&nbsp; <%=   @user.username %></dd>
+
+    <dd><b>Data Iscrizione:</b> &nbsp;&nbsp;&nbsp;&nbsp;<%= @user.created_at.strftime("%B, %e, %Y") %></dd>
+
+
+
+
+
+
+
+    <dd><b>Status Personale:</b> &nbsp;&nbsp;&nbsp;&nbsp;
+    <% if (@user.status.blank?) %>
+           <span class="none">Non Inserito &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <% if current_user.roles_mask == 4 %>
+
+           <% if @user.clan == 1 %>
+            <p style = "display:inline; font-size: 18px;"><%= link_to "Modifica", edit_editstatus_path(@var) %></p>
+
+        <% elsif @user.clan == 2 %>
+            <p style = "display:inline; font-size: 18px;"><%= link_to "Modifica", edit_editstatus_path(@var) %></p>
+
+        <% else %>
+            <p style = "display:inline; font-size: 18px;"><%= link_to "Modifica", edit_editstatus_path(@var) %></p>
+
+        <% end %>
+    <% end %>
+
+        </span>
+
+
+    <%else %>
+
+    <%= @user.status %>
+
+     <% if current_user.roles_mask == 4 %>
+
+        <% if @user.clan == 1 %>
+            <p style = "display:inline; font-size: 18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Modifica", edit_editstatus_path(@var) %></p>
+
+        <% elsif @user.clan == 2 %>
+            <p style = "display:inline; font-size: 18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Modifica", edit_editstatus_path(@var) %></p>
+
+        <% else %>
+            <p style = "display:inline; font-size: 18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Modifica", edit_editstatus_path(@var) %></p>
+
+        <% end %>
+
+    <% end %>
+
+     <% end %>
+
+
+    </dd>
+
+
+
+
+
+
+
+
+    <dd><b>Clan: </b> &nbsp;&nbsp;&nbsp;&nbsp;
+    <% if (@user.clan==1) %>
+            <span class="none">Guerriero</span>
+    <% end %>
+    <% if (@user.clan==2) %>
+            <span class="none">Elfo</span>
+    <% end %>
+
+    <% if (@user.clan==3) %>
+            <span class="none">Orco</span>
+    <% end %>
+
+    </dd>
+
+
+
+
+
+
+    <dd><b>Ruolo:</b> &nbsp;&nbsp;&nbsp;&nbsp;
+
+    <%if @user.roles_mask == 1 %>
+                Membro
+    <%else %>
+            Capoclan
+    <%end %>
+
+    </dd>
+
+
+
+
+
+
+       <% if User.find(@var).ban_flag == 1%>
+           <b>  Questo Utente è stato bannato dall' Admin</b>
+        <%end%>
+
+<br>
+
+
+
+
+
+
+
+
+
+<% if @var == current_user.id %>
+     <span style="text-align:center;font-size: 1.7em;"><%= link_to "Cambia Impostazioni Utente", edit_user_registration_path %></span>
+
+
+
+
+<% elsif @var != current_user.id && current_user.roles_mask == 2 && User.find(@var).clan == current_user.clan  %>
+
+        <dd><%= button_to 'Nomina Capoclan', {:action => "nomina_capoclan"},  data: { confirm: "Are you sure?" }, :params => {:id => @var}, :method => :post, :style => 'width: 200px; ', :class => "btn btn-lg btn-primary" %>
+       </dd>
+
+<% elsif current_user.roles_mask == 4  && User.find(@var).roles_mask != 2 %>
+
+    <dd>
+    <table>
+    <tr>
+    <th ><%= button_to 'Nomina Capoclan', {:action => "nomina_capoclan"},  data: { confirm: "Are you sure?" }, :params => {:id => @var}, :method => :post, :style => 'width: 200px; display:inline;', :class => "btn btn-lg btn-primary" %></th>
+
+    <% if User.find(@var).ban_flag == 0%>
+        <th><%= button_to "Banna Account", {:action => "banna_utente"}, data: { confirm: "Are you sure?" }, :params => {:id => @var}, method: :post , :class=> "btn btn-lg btn-primary button1"  ,style: " width: 200px;   "%></th>
+
+    <%else%>
+        <th><%= button_to "Togli Ban", {:action => "togli_ban"}, data: { confirm: "Are you sure?" }, :params => {:id => @var}, method: :post , :class=> "btn btn-lg btn-primary button1"  ,style: " width: 200px;  "%></th>
+
+    <% end %>
+
+
+
+
+    <th><%= button_to "Cancella Account", admin_destroy_user_path(User.find(@var)), data: { confirm: "Are you sure?" }, method: :delete , :class=> "btn btn-lg btn-primary button2" ,style: " width: 200px; "%> </th>
+    </tr>
+    </table>
+    </dd>
+
+
+
+<% elsif  current_user.roles_mask == 4  && User.find(@var).roles_mask == 2 %>
+
+     <table>
+    <tr>
+
+    <% if User.find(@var).ban_flag == 0%>
+        <th><%= button_to "Banna Account", {:action => "banna_utente"}, data: { confirm: "Are you sure?" }, :params => {:id => @var}, method: :post , :class=> "btn btn-lg btn-primary button1"  ,style: " width: 200px;   "%></th>
+
+
+    <%else%>
+        <th><%= button_to "Togli Ban", {:action => "togli_ban"}, data: { confirm: "Are you sure?" }, :params => {:id => @var}, method: :post , :class=> "btn btn-lg btn-primary button1"  ,style: " width: 200px;  "%></th>
+    <% end %>
+
+   <th><%= button_to "Cancella Account", admin_destroy_user_path(User.find(@var)), data: { confirm: "Are you sure?" }, method: :delete , :class=> "btn btn-lg btn-primary button2" ,style: " width: 200px; "%> </th>
+    </tr>
+    </table>
+
+<% end %>
+
+
+
+</br>
+<% if current_user.roles_mask == 4 || current_user == User.find(@var) %>
+  <dd><%= button_to 'Cambia immagine', {:action => "cambia_immagine"},  data: { confirm: "Are you sure?" }, :params => {:id => @var}, :method => :post, :style => 'width: 200px; ', :class => "btn btn-lg btn-primary" %>
+  </dd>
+<% end %>
+
+    </dl>
+
+     </div>
+
+
+
+
+
+
+
+
+
+
+
+<footer class="footer">
+ <br/>
+
+<div>
+
+<h1 id = "titoloStats";> Caratteristiche  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Equipaggiamento Difensivo</h1>
+
+<div id= "cont">
+
+<div class="center jumbotron">
+
+    <dd style="float:left;"><b>Livello: </b>&nbsp;&nbsp;<%= @user.livello %></dd><br><br><br>
+
+    <dd style="float:left;"><b>Attacco: </b>&nbsp;&nbsp;<%= @user.attacco%> </dd>
+
+    <dd> <b>Attacco Speciale:</b>&nbsp;&nbsp;<%= @user.attaccospec%></dd><br><br>
+
+    <dd style="float:left;"><b>Difesa: </b>&nbsp;&nbsp;<%= @user.difesa %> </dd>
+
+    <dd> <b>Difesa Speciale:</b>&nbsp;&nbsp;<%= @user.difesaspec %></dd><br><br>
+
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+<div id = "cont2">
+
+<div id = "ciao" class="center jumbotron">
+
+
+<table class="table table-borderless">
+
+<tr>
+<td>
+
+<%= form_for @user do |f| %>
+  <%= f.label :att %>:
+  <%= f.select :att, [["Spada"], ["Arco"], ["Mazza chiodata"]]%>
+
+  <%= f.label :def %>:
+  <%= f.select :def, [["Scudo di ferro"], ["Scudo di legno"], ["Doppia arma"]]%>
+
+  <%= f.label :arm %>:
+  <%= f.select :arm, [["Cotta di maglia"], ["Completo del viandante"], ["Armatura di diamante"]]%>
+    <% if current_user == User.find(@var) || current_user.roles_mask == 4 %>
+        <%= f.submit  'Salva modifiche!',class: "btn btn-lg btn-primary"%>
+    <% else %>
+
+    <% end %>
+<% end %>
+
+</td>
+</tr>
+</table>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+
+
+
+
+
+<footer class="footer"></footer>
+
+ <br/>
+
+
+<h1 id = "titoloStats"> &nbsp;Statistiche &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ultimi Incontri</h1>
+
+<div id = "stats">
+
+<div class="center jumbotron">
+
+    <dd style="text-align:left;"><b>Vittorie: </b>&nbsp;&nbsp;<%= current_user.vittorie %></dd>
+
+    <dd style="text-align:left;"><b>Sconfitte:</b>&nbsp;&nbsp;<%= current_user.sconfitte%></dd>
+
+    <dd style="text-align:left;"><b>Rateo:</b>&nbsp;&nbsp;
+    <%=if current_user.sconfitte == 0
+        current_user.vittorie/1
+    else
+        (((current_user.vittorie.to_f)/(current_user.sconfitte.to_f))*100).round / 100.0
+        end%> </dd>
+
+</div>
+
+</div>
+
+
+        <dl>
+
+
+
+
+
+<div id="battlestats">
+
+<div class="center jumbotron">
+
+
+
+    <%if Match.find_by(:user => @user.id) == nil %>
+        <dd style="text-align:left;"><b>Non ci sono partite recenti</b></dd>
+        <dd style="text-align:left;">&nbsp;</dd>
+        <dd style="text-align:left;">&nbsp;</dd>
+
+
+
+
+    <% elsif Match.where(:user => @user.id).count >= 3
+        @partita1 = Match.where(:user => @user.id).find_by(:flag => 1)
+        @partita2 = Match.where(:user => @user.id).find_by(:flag => 2)
+        @partita3 = Match.where(:user => @user.id).find_by(:flag => 3)
+
+    %>
+
+    <% if User.exists?(:id => @partita1.avversario)%>
+        <dd style="text-align:left;"><b><%= User.find(@partita1.user).username %></b> &nbsp;&nbsp; VS &nbsp;&nbsp; <b><%= User.find(@partita1.avversario).username  %></b>  &nbsp;&nbsp;  <% if @partita1.result == 1 %> --> Vittoria <%else %> --> Sconfitta <%end %></dd>
+    <% else %>
+        <dd style="text-align:left;">&nbsp;</dd>
+    <%end%>
+
+    <% if User.exists?(:id => @partita2.avversario)%>
+        <dd style="text-align:left;"><b><%= User.find(@partita2.user).username  %></b> &nbsp;&nbsp; VS &nbsp;&nbsp; <b><%= User.find(@partita2.avversario).username  %></b>  &nbsp;&nbsp;  <% if @partita2.result == 1 %> --> Vittoria <%else %> --> Sconfitta <%end %></dd>
+    <% else %>
+        <dd style="text-align:left;">&nbsp;</dd>
+    <%end%>
+
+    <% if User.exists?(:id => @partita3.avversario)%>
+        <dd style="text-align:left;"><b><%= User.find(@partita3.user).username  %></b> &nbsp;&nbsp; VS &nbsp;&nbsp; <b><%= User.find(@partita3.avversario).username  %></b>  &nbsp;&nbsp;  <% if @partita3.result == 1 %> --> Vittoria <%else %> --> Sconfitta <%end %></dd>
+    <% else %>
+        <dd style="text-align:left;">&nbsp;</dd>
+    <%end%>
+
+
+
+
+    <% elsif Match.where(:user => @user.id).count == 2
+
+        @partita1 = Match.where(:user => @user.id).find_by(:flag => 1)
+        @partita2 = Match.where(:user => @user.id).find_by(:flag => 2)
+
+        %>
+
+
+
+    <% if User.exists?(:id => @partita1.avversario)%>
+        <dd style="text-align:left;"><b><%= User.find(@partita1.user).username %></b> &nbsp;&nbsp; VS &nbsp;&nbsp; <b><%= User.find(@partita1.avversario).username  %></b>  &nbsp;&nbsp;  <% if @partita1.result == 1 %> --> Vittoria <%else %> --> Sconfitta <%end %></dd>
+    <% else %>
+        <dd style="text-align:left;">&nbsp;</dd>
+    <%end%>
+
+    <% if User.exists?(:id => @partita2.avversario)%>
+        <dd style="text-align:left;"><b><%= User.find(@partita2.user).username  %></b> &nbsp;&nbsp; VS &nbsp;&nbsp; <b><%= User.find(@partita2.avversario).username  %></b>  &nbsp;&nbsp;  <% if @partita2.result == 1 %> --> Vittoria <%else %> --> Sconfitta <%end %></dd>
+    <% else %>
+        <dd style="text-align:left;">&nbsp;</dd>
+    <%end%>
+
+        <dd style="text-align:left;">&nbsp;</dd>
+
+
+
+
+
+     <% else
+            @partita1 = Match.where(:user => @user.id).find_by(:flag => 1)
+        %>
+
+
+    <% if User.exists?(:id => @partita1.avversario)%>
+        <dd style="text-align:left;"><b><%= User.find(@partita1.user).username %></b> &nbsp;&nbsp; VS &nbsp;&nbsp; <b><%= User.find(@partita1.avversario).username  %></b>  &nbsp;&nbsp;  <% if @partita1.result == 1 %> --> Vittoria <%else %> --> Sconfitta <%end %></dd>
+    <% else %>
+        <dd style="text-align:left;">&nbsp;</dd>
+    <%end%>
+
+        <dd style="text-align:left;"> &nbsp;</dd>
+        <dd style="text-align:left;">&nbsp; </dd>
+
+
+        <%end%>
+
+
+
+
+
+        </dl>
+</div>
+
+</div>
+
+
+
+</div>
+
+</body>
