@@ -17,7 +17,7 @@ export class UserService {
     this.http.get(this.APIURL+'.json').subscribe(
         data => {
           var users_server = [];
-          for (var i = 0; i < data.length; i++){
+          for (var i = 0; i < data['length']; i++){
               if (data[i]['nome'] != 'admin' && !this.getUser_byEmail(data[i]['email'])){
                   users_server.push (data[i]['email'])
                   var user_temp = new User();
@@ -31,7 +31,7 @@ export class UserService {
                   this.createUser(user_temp);
                 }
           }
-          console.log(users_server)
+          console.log(users_server);
 
         },
         error => alert(error.message)
