@@ -1,2 +1,2 @@
 # AngulARAISE
-Progetto per tiriocinio
+Progetto per tirocinio
