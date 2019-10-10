@@ -22,6 +22,8 @@ import { ContattiComponent } from './contatti/contatti.component';
 
 import { ApiService } from './api.service';
 import { HttpClientModule } from '@angular/common/http';
+import { UserAccessComponent } from './user-access/user-access.component';
+import { FooterComponent } from './footer/footer.component';
 
 const routes: Routes = [
   {
@@ -58,6 +60,10 @@ const routes: Routes = [
     component: UserDetailComponent
   },
   {
+    path: 'users/login',
+    component: UserAccessComponent
+  },
+  {
     path: 'users/:id',
     component: UserDataComponent
   },
@@ -78,7 +84,8 @@ const routes: Routes = [
     UserDataComponent,
     RegolamentoComponent, 
     HomeComponent, InfoClanComponent, 
-    AboutAppComponent, ContattiComponent
+    AboutAppComponent, ContattiComponent, 
+    UserAccessComponent, FooterComponent
   ],
   imports: [
     BrowserModule,

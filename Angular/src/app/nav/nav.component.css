@@ -1,0 +1,16 @@
+.nav-link{
+	font-weight: bold;
+	color: dodgerblue;
+}
+.nav-item{
+	font-weight: bold;
+}
+
+
+.nav-item > a:hover {
+  color: yellow;
+}
+
+.li{
+	color: DodgerBlue ;
+}
