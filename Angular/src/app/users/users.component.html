@@ -1,19 +1,23 @@
-<table class="table table-striped table-md table-dark">
-    <caption>{{title}}</caption>
+<div>
+  <br>
+  <h1>Classifica generale</h1>
+  <br><br>
+  <table border='1' width='100%' style='border-collapse: collapse;'>
     <tr>
-        <th>Username</th>
-        <th>Nome</th>
-        <th>Cognome</th>
-        <th>Email</th>
-        <th>Clan</th>
-        <th>Immagine</th>
-        <th>Action</th>
-    </tr>
-  <tr app-user *ngFor ="let user of users"
-   [user-data] ="user"
-   (onDeleteUser) ="onDeleteUser($event)"
-   (onSelectUser) ="onSelectUser($event)"
-   >
+      <th>Username</th>
+      <th>Clan</th>
+      <th>Vittorie</th>
+      <th>Sconfitte</th>  
+      <th>Ratio</th>  
 
-  </tr>
-</table>
+    </tr>
+
+    <tr *ngFor="let user of users">
+      <td>{{ user.username }}</td>
+      <td>{{ user.clan }}</td>
+      <td>{{ user.win }}</td>
+      <td>{{ user.lost }}</td>
+      <td>{{ user.win }}/ {{user.lost}}</td>
+    </tr>
+  </table>
+</div>

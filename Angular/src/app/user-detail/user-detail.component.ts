@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {User} from '../classes/User';
-import {UserService} from '../services/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import { ApiService } from '../api.service';
+import { UserInterface } from '../interfaces/user';
 
 @Component({
   selector: 'app-user-detail',
@@ -9,50 +9,58 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent implements OnInit {
-  private usercopy;
-  private __user;
+  constructor(private apiService : ApiService, private router: Router) { }
 
-  @Input() set user(user: User) {
-    this.__user = user;
-    this.usercopy = Object.assign({}, user);
-  }
+  users:  UserInterface[];
+  selectedUser:  UserInterface  = { id :  null , username: null, email: null, 
+    password : null, nome: null, cognome: null,  
+    password_confirmation: null, clan: null, 
+    img_profile: null, logged:null, 
+    win: null, lost: null, status: null  };
 
-  get user() {
-    return this.__user;
-  }
+    ngOnInit() {
+      this.apiService.readUsers().subscribe((users: UserInterface[])=>{
+        this.users = users;
+        console.log(this.users);
+      })
+    }
 
-  constructor(private userService: UserService, private route: ActivatedRoute,
-              private router: Router) {
+    
+    
 
-  }
+    createUser(form){
+      if(this.selectedUser.password == this.selectedUser.password_confirmation){
+        form.value.win = 2;
+        form.value.lost = 3;
+        form.value.logged = 0;
+        if(form.value.clan == 'guerriero'){
+          form.value.img_profile = 'guerriero1.jpeg';
+        }
+        else if(form.value.clan == 'elfo'){
+          form.value.img_profile = 'elfo1.jpeg';
+        }
+        else{
+          form.value.img_profile = 'orco1.jpeg';
+        }
+        this.apiService.createUser(form.value)
+            .subscribe((user: UserInterface)=>{
+            console.log("User created, ", user);
+          });
 
-  ngOnInit() {
-    this.user = new User();
-    this.route.params.subscribe(params => {
-      if(!params.id){
-        return;
+        
+        return 'create';
       }
-      this.user = this.userService.getUser(+params.id);
-
-    });
-  }
-
-  saveUser() {
-    if (this.user.id > 0) {
-      this.userService.updateUser(this.user);
-    } else {
-      this.userService.createUser(this.user);
+      else{
+        console.log('Password non coincidenti.')
+      }
     }
-    this.router.navigate(['users']);
-  }
-
-  resetForm(form) {
-
-    if (this.user.id === 0) {
-      this.user = new User();
-    } else {
-      this.user = this.usercopy;
+  
+    
+  
+    deleteUser(id){
+      this.apiService.deleteUser(id).subscribe((user: UserInterface)=>{
+        console.log("User deleted, ", user);
+      });
     }
-
-  }
 }
+

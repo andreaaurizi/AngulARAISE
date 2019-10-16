@@ -1,30 +1,95 @@
 <h2>{{ title }}</h2>
-<table class="table table-dark">
-  <tr>
-    <th>Username</th>
-    <td>{{User.username}}</td>
-  </tr>
-  <tr>
-    <th>Nome</th>
-    <td>{{User.nome}}</td>
-  </tr>
-  <tr>
-    <th>Cognome</th>
-    <td>{{User.cognome}}</td>
-  </tr>
-  <tr>
-    <th>Email</th>
-    <td>{{User.email}}</td>
-  </tr>
-  <tr>
-    <th>Clan</th>
-    <td>{{User.clan}}</td>
-  </tr>
-  <tr>
-    <th>Immagine</th>
-    <td>{{User.img_profile}}</td>
-  </tr>
-  <tfoot>
-  <tr> <td colspan="2"><button class="btn btn-primary" (click)="backToUsers()">BACK</button></td> </tr>
-  </tfoot>
-</table>
+
+
+<h1>Profilo di {{user.username}} </h1>
+
+
+
+<div id = "content">
+
+  <div class="row">
+    
+      <div class="col-sm-3">
+          
+           <img src="../../assets/images/guerriero2.jpeg" style = "display: block; margin: 0px auto; width: 250px; height: 400px; cursor: pointer; left: 0" alt="Img">
+        </div>
+        
+        <div class="col-sm-6">
+            <table class="table table-dark">
+                <tr>
+                  <th>Username</th>
+                  <td>{{user.username}}</td>
+                </tr>
+                <tr>
+                  <th>Nome</th>
+                  <td>{{user.nome}}</td>
+                </tr>
+                <tr>
+                  <th>Cognome</th>
+                  <td>{{user.cognome}}</td>
+                </tr>
+                <tr>
+                  <th>Email</th>
+                  <td>{{user.email}}</td>
+                </tr>
+                <tr>
+                  <th>Clan</th>
+                  <td>{{user.clan}}</td>
+                </tr>
+                <tr>
+                  <th>Status</th>
+                  <td>{{user.status}}</td>
+                </tr>
+                <tr>
+                  <th>Ruolo</th>
+                  <td>Membro</td>
+                </tr>
+                <tfoot>
+                <tr> <td colspan="2"><button class="btn btn-primary" routerLink="/users/:id/edit">Edit</button></td> </tr>
+                </tfoot>
+              </table>
+        </div>
+        
+        <div class="col-sm-3">
+        </div>
+    
+
+  </div>
+
+   <h1 id = "titoloStats"> Caratteristiche  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Statistiche</h1>
+
+  <div id= "cont" class="row">
+
+    <div class="center jumbotron col-sm-5">
+
+        <dd style="float:left;"><b>Livello: </b>1</dd><br><br><br>
+
+        <dd style="float:left;"><b>Attacco: </b>&nbsp;&nbsp;5 &nbsp;&nbsp;&nbsp;&nbsp; </dd> 
+
+        <dd> <b>Attacco Speciale:</b>&nbsp;&nbsp;5</dd><br><br>
+
+        <dd style="float:left;"><b>Difesa: </b>&nbsp;&nbsp;5 &nbsp;&nbsp;&nbsp;&nbsp; </dd> 
+
+        <dd> <b>Difesa Speciale:</b>&nbsp;&nbsp;5</dd><br><br>
+
+
+
+    </div>
+    <div class="center  col-sm-1">
+      
+    </div>
+    <div class="center jumbotron col-sm-5">
+      
+        <dd style="float:left;"><b>Vittorie: </b> {{user.win}} </dd><br><br><br>
+
+        <dd style="float:left;"><b>Sconfitte: </b>&nbsp;&nbsp; {{user.lost}} &nbsp;&nbsp;&nbsp;&nbsp; </dd> <br><br><br>
+
+
+        <dd style="float:left;"><b>Ratio: </b>&nbsp;&nbsp; {{user.win}}/{{user.lost}} &nbsp;&nbsp;&nbsp;&nbsp; </dd> 
+
+
+    </div>
+
+  </div>
+</div>
+

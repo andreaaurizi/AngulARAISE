@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {User} from '../classes/User';
-import {UserService} from '../services/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import { ApiService } from '../api.service';
+import { UserInterface } from '../interfaces/user';
 
 @Component({
   selector: 'app-user-access',
@@ -10,41 +10,60 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class UserAccessComponent implements OnInit {
 
-  private usercopy;
-  private __user;
+  constructor(private apiService : ApiService, private router: Router) { }
 
-  @Input() set user(user: User) {
-    this.__user = user;
-    this.usercopy = Object.assign({}, user);
-  }
+  users:  UserInterface[];
+  selectedUser:  UserInterface  = { id :  null , username: null, email: null, 
+                                    password : null, nome: null, cognome: null,  
+                                    password_confirmation: null, clan: null, 
+                                    img_profile: null, logged:null, 
+                                    win: null, lost: null, status: null  };
 
-  get user() {
-    return this.__user;
-  }
-
-  constructor(private userService: UserService, private route: ActivatedRoute,
-              private router: Router) {
-
-  }
-
-  ngOnInit() {
-    this.user = new User();
-    this.route.params.subscribe(params => {
-      if(!params.id){
-        return;
-      }
-      this.user = this.userService.getUser(+params.id);
-
-    });
-  }
-
-  saveUser() {
-    if (this.user.id > 0) {
-      this.userService.updateUser(this.user);
-    } else {
-      this.userService.createUser(this.user);
+    ngOnInit() {
+      this.apiService.readUsers().subscribe((users: UserInterface[])=>{
+        this.users = users;
+        console.log(this.users);
+      })
     }
-    this.router.navigate(['users']);
-  }
+
+    
+
+    loginUser(form){
+      var list = this.users;
+      var i = 0;
+      console.log(list);
+      while(i < list.length){
+        if(list[i].email == form.value.email && list[i].password == form.value.password){
+          this.selectedUser = list[i];
+          form.value.id = this.selectedUser.id;
+          form.value.username = this.selectedUser.username;
+          form.value.email = this.selectedUser.email;
+          form.value.password = this.selectedUser.password;
+          form.value.nome = this.selectedUser.nome;
+          form.value.cognome = this.selectedUser.cognome;
+          form.value.clan = this.selectedUser.clan;
+          form.value.logged = 1;
+          form.value.win = this.selectedUser.win;
+          form.value.lost = this.selectedUser.lost;
+          form.value.status = this.selectedUser.status;
+          console.log(form.value);
+          this.apiService.updateUser(form.value).subscribe((user: UserInterface)=>{
+            console.log("User loggato" , user);
+          });
+          this.router.navigate(['/home']);
+          return;
+        }
+        i++;
+      }
+      console.log("Idea carina, ma non worka.")
+      
+    }
+  
+    selectUser(user: UserInterface){
+      this.selectedUser = user;
+    }
+  
+
+  
 
 }

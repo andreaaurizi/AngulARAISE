@@ -1,35 +1,45 @@
 <div class="center jumbotron">
-<div class="row">
-
-
-    <div class="col-md-3">
-
-    </div>
-
-    <div class="col-md-6">
-
-        <h1 style="font-weight: bold;"> Log In </h1>
-
-        <form #f ="ngForm">
-          <input type="hidden" name="id"  [(ngModel)]="user.id">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input  [(ngModel)]="user.email"  class="form-control" type="email" name="email" id="email">
-          </div>
-          <div class="form-group">
-            <label for="clan">Clan ---> Password</label>
-            <input  [(ngModel)]="user.clan"  class="form-control" name="clan" id="clan">
-          </div>
-          <div class="form-group form-footer">
-            <button class="btn btn-success" (click)="saveUser()"> Enter</button>
-          </div>
-        </form>
-
-    </div>
+  <div class="row">
 
     <div class="col-md-3">
 
+      </div>
+
+      <div class="col-md-6">
+
+          <h1 style="font-weight: bold;"> Log In </h1>
+
+          <form #f ="ngForm">
+            <div class="form-group">
+              <label>Email</label>
+              <input  [(ngModel)]="selectedUser.email"  class="form-control" type="email" name="email" id="email">
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input  [(ngModel)]="selectedUser.password"  class="form-control" type="password" name="password" id="password">
+              
+              <input type="text" name="id" [(ngModel)] = "selectedUser.id" hidden="true">
+              <input type="text" name="username" [(ngModel)] = "selectedUser.username" hidden="true">
+              <input type="text" name="nome" [(ngModel)] = "selectedUser.nome" hidden="true">
+              <input type="text" name="cognome" [(ngModel)] = "selectedUser.cognome" hidden="true">
+              <input type="text" name="img_profile" [(ngModel)] = "selectedUser.img_profile" hidden="true">
+              <input type="text" name="win" [(ngModel)] = "selectedUser.win" hidden="true">
+              <input type="text" name="lost" [(ngModel)] = "selectedUser.lost" hidden="true">
+              <input type="text" name="logged" [(ngModel)] = "selectedUser.img_profile" hidden="true">
+              <input type="text" name="status" [(ngModel)] = "selectedUser.status" hidden="true">
+            </div>
+            <div class="form-group form-footer">
+              <button class="btn btn-success" (click)="loginUser(f)"> Enter</button>
+            </div>
+          </form>
+
+      </div>
+
+      <div class="col-md-3">
+
     </div>
 
-</div>
+  </div>
+
+ 
 </div>

@@ -24,8 +24,16 @@ import { ApiService } from './api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UserAccessComponent } from './user-access/user-access.component';
 import { FooterComponent } from './footer/footer.component';
+import { UserModifyComponent } from './user-modify/user-modify.component';
+
+
+
 
 const routes: Routes = [
+  {
+    path:'app',
+    component: AppComponent,
+  },
   {
     path: 'users',
     component: UsersComponent
@@ -69,7 +77,7 @@ const routes: Routes = [
   },
   {
     path: 'users/:id/edit',
-    component: UserDetailComponent
+    component: UserModifyComponent
   }
 ];
 
@@ -85,7 +93,8 @@ const routes: Routes = [
     RegolamentoComponent, 
     HomeComponent, InfoClanComponent, 
     AboutAppComponent, ContattiComponent, 
-    UserAccessComponent, FooterComponent
+    UserAccessComponent, FooterComponent, 
+    UserModifyComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +103,7 @@ const routes: Routes = [
     AngularFontAwesomeModule,
     NgbModule, HttpClientModule
   ],
-  providers: [UserService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

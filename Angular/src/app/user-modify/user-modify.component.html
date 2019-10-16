@@ -1,0 +1,40 @@
+<h1>Users Management</h1>
+<div>
+  <br>
+  <form #f = "ngForm">
+    <label>Username</label>
+    <input type="text" name="username" [(ngModel)] = "selectedUser.username">
+    <br>
+    <label>Email</label>
+    <input type="text" name="email" [(ngModel)] = "selectedUser.email">
+    <br>
+    <label>Password</label>
+    <input type="password" name="password" [(ngModel)] = "selectedUser.password">
+    <br>
+    <label>Password Confirmation</label>
+    <input type="password" name="password" [(ngModel)] = "selectedUser.password_confirmation">
+    <br>
+    <label>Nome</label>
+    <input type="text" name="nome" [(ngModel)] = "selectedUser.nome">
+    <br>
+    <label>Cognome</label>
+    <input type="text" name="cognome" [(ngModel)] = "selectedUser.cognome">
+    <br>
+    <br>
+    <label>Status</label>
+    <input type="text" name="status" [(ngModel)] = "selectedUser.status">
+    <br>
+    <label>Clan__________________________________________________________________________________________________________
+    <input type="radio" name="clan" class="with-gap" [(ngModel)]="selectedUser.clan" value="guerriero" checked> Guerriero<br>
+      <input type="radio" name="clan" class="with-gap" [(ngModel)]="selectedUser.clan" value="elfo"> Elfo<br>
+      <input type="radio" name="clan" class="with-gap" [(ngModel)]="selectedUser.clan"  value="orco"> Orco
+    </label>
+    <input type="text" name="img_profile" [(ngModel)] = "selectedUser.img_profile" hidden="true">
+    <input type="text" name="win" [(ngModel)] = "selectedUser.win" hidden="true">
+    <input type="text" name="lost" [(ngModel)] = "selectedUser.lost" hidden="true">
+    <input type="text" name="logged" [(ngModel)] = "selectedUser.img_profile" hidden="true">
+
+    <br>
+    <input type="button" (click)="updateUser(f)" routerLink="/users/:id" value="Update User">
+    <input type="button" (click)="deleteUser()" routerLink="/home" value="Delete User">
+  </form>

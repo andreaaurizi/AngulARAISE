@@ -8,4 +8,9 @@ export interface UserInterface {
   password_confirmation: string;
   clan: string;
   img_profile: string;
+  win: number;
+  lost: number;
+  logged: number;
+  status: string;
+  
 }

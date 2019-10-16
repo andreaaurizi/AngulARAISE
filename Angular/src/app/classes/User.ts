@@ -10,6 +10,10 @@ export class User implements UserInterface {
   password_confirmation: string;
   clan: string;
   img_profile: string;
+  logged: number;
+  win: number;
+  lost: number;
+  status: string;
 
   constructor() {
     this.id = 0;
@@ -21,5 +25,11 @@ export class User implements UserInterface {
     this.password_confirmation = '';
     this.clan = '';
     this.img_profile = '';
+    this.win = 0;
+    this.lost = 0;
+    this.logged = 0;
+    this.status = '';
   }
+
+ 
 }

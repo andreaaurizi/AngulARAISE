@@ -8,13 +8,14 @@ import {User} from '../classes/User';
 
 export class UserService {
   users: UserInterface[] = [];
-  private APIURL = 'http://localhost:3000/users';
+  //private APIURL = 'http://localhost:3000/users';
+  private APIURL = 'http://localhost/Angular_function/example.php';
 
   constructor(private http : HttpClient) {
   }
 
   getUsers() {
-    this.http.get(this.APIURL+'.json').subscribe(
+    /*this.http.get(this.APIURL+'.json').subscribe(
         data => {
           var users_server = [];
           for (var i = 0; i < data['length']; i++){
@@ -35,6 +36,29 @@ export class UserService {
 
         },
         error => alert(error.message)
+    );
+    return this.users; */
+
+
+    this.http.get(this.APIURL).subscribe(
+      data => {
+        var users_server = [];
+        for (var i = 0; i < data['length']; i++){
+            
+          users_server.push (data[i]['email'])
+          var user_temp = new User();
+          
+          user_temp.email = data[i]['email'];
+          user_temp.nome = data[i]['nome'];
+          user_temp.cognome = data[i]['cognome'];
+          user_temp.username = data[i]['username'];
+          this.createUser(user_temp);
+            
+        }
+        console.log(users_server);
+
+      },
+      error => alert(error.message)
     );
     return this.users;
   }

@@ -1,0 +1,22 @@
+.button1 {
+    background-color:#ffa500;
+    color: white;
+  }
+  .button1:hover {
+    background-color: #ffa500;
+    filter: brightness(85%);
+    color: white;
+  }
+  .button2 {
+    background-color:#dc143c;
+    color: white;
+  }
+  .button2:hover {
+    background-color: #dc143c;
+    filter: brightness(85%);
+    color: white;
+  }
+
+  .col-sm-5{
+    margin: 2px 1px;
+  }
