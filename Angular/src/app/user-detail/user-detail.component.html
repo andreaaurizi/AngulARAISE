@@ -1,38 +1,73 @@
-<h1>Registration</h1>
-<div>
-
+<div class="center jumbotron">
+  <div class="row">
   
-  <br>
-  <form #f = "ngForm">
-    <label>Username</label>
-    <input type="text" name="username" [(ngModel)] = "selectedUser.username">
-    <br>
-    <label>Email</label>
-    <input type="text" name="email" [(ngModel)] = "selectedUser.email">
-    <br>
-    <label>Password</label>
-    <input type="password" name="password" [(ngModel)] = "selectedUser.password">
-    <br>
-    <label>Password Confirmation</label>
-    <input type="password" name="password" [(ngModel)] = "selectedUser.password_confirmation">
-    <br>
-    <label>Nome</label>
-    <input type="text" name="nome" [(ngModel)] = "selectedUser.nome">
-    <br>
-    <label>Cognome</label>
-    <input type="text" name="cognome" [(ngModel)] = "selectedUser.cognome">
-    <br>
-    <label>Clan__________________________________________________________________________________________________________
-    <input type="radio" name="clan" class="with-gap" [(ngModel)]="selectedUser.clan" value="guerriero" checked> Guerriero<br>
-      <input type="radio" name="clan" class="with-gap" [(ngModel)]="selectedUser.clan" value="elfo"> Elfo<br>
-      <input type="radio" name="clan" class="with-gap" [(ngModel)]="selectedUser.clan"  value="orco"> Orco
-    </label>
-    <input type="text" name="img_profile" [(ngModel)] = "selectedUser.img_profile" hidden="true">
-    <input type="text" name="win" [(ngModel)] = "selectedUser.win" hidden="true">
-    <input type="text" name="lost" [(ngModel)] = "selectedUser.lost" hidden="true">
-    <input type="text" name="logged" [(ngModel)] = "selectedUser.img_profile" hidden="true">
-    <input type="text" name="status" [(ngModel)] = "selectedUser.status" hidden="true">
+    <div class="col-md-3">
+  
+    </div>
+  
+    <div class="col-md-6">
 
-    <br>
-    <input type="button" (click)="createUser(f)" routerLink="/users/login" value="Create User">
-  </form>
+        <h1 style="font-weight: bold;"> Log In </h1>
+
+        <form #f = "ngForm">
+            <label>Username</label>
+            <input type="text" name="username" [(ngModel)] = "selectedUser.username" required>
+            <br>
+            <label>Email</label>
+            <input type="text" name="email" [(ngModel)] = "selectedUser.email" required>
+            <br>
+            <label>Password</label>
+            <input type="password" name="password" [(ngModel)] = "selectedUser.password" required>
+            <br>
+            <label>Password Confirmation</label>
+            <input type="password" name="password" [(ngModel)] = "selectedUser.password_confirmation" required>
+            <br>
+            <label>Nome</label>
+            <input type="text" name="nome" [(ngModel)] = "selectedUser.nome" required>
+            <br>
+            <label>Cognome</label>
+            <input type="text" name="cognome" [(ngModel)] = "selectedUser.cognome" required>
+            <br>
+            <label style="font-weight: bold">Clan :</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="clan" id="guerriero" [(ngModel)]="selectedUser.clan" value="guerriero" checked>
+              <label class="form-check-label" for="guerriero">
+                Guerriero
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="clan" id="elfo" [(ngModel)]="selectedUser.clan" value="elfo">
+              <label class="form-check-label" for="elfo">
+                Elfo
+              </label>
+            </div>
+            <div class="form-check disabled">
+              <input class="form-check-input" type="radio" name="clan" id="orco" [(ngModel)]="selectedUser.clan" value="orco">
+              <label class="form-check-label" for="orco">
+                Orco
+              </label>
+            </div>
+              <!--<input type="radio" name="clan" class="with-gap" [(ngModel)]="selectedUser.clan" value="guerriero" checked> Guerriero<br>
+              <input type="radio" name="clan" class="with-gap" [(ngModel)]="selectedUser.clan" value="elfo"> Elfo<br>
+              <input type="radio" name="clan" class="with-gap" [(ngModel)]="selectedUser.clan"  value="orco"> Orco-->
+            
+            <input type="text" name="img_profile" [(ngModel)] = "selectedUser.img_profile" hidden="true">
+            <input type="text" name="win" [(ngModel)] = "selectedUser.win" hidden="true">
+            <input type="text" name="lost" [(ngModel)] = "selectedUser.lost" hidden="true">
+            <input type="text" name="logged" [(ngModel)] = "selectedUser.img_profile" hidden="true">
+            <input type="text" name="status" [(ngModel)] = "selectedUser.status" hidden="true">
+        
+            <br>
+            <input type="button" (click)="createUser(f)" value="Create User">
+          </form>
+
+    </div>
+  
+    <div class="col-md-3">
+  
+    </div>
+  
+  </div>
+  
+    
+</div>

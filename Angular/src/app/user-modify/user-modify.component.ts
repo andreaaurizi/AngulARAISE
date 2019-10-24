@@ -33,6 +33,7 @@ export class UserModifyComponent implements OnInit {
 
     
     updateUser(form){
+        console.log(form);
         form.value.id = this.selectedUser.id;
         this.apiService.updateUser(form.value).subscribe((user: UserInterface)=>{
           console.log("User updated" , user);

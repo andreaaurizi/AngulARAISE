@@ -17,6 +17,18 @@
     color: white;
   }
 
+
   .col-sm-5{
     margin: 2px 1px;
+  }
+
+  .resp_height{
+  /* 25% of viewport */
+    height: 25vh;
+    width: 15rem;
+    background-color: #222;
+    color: #eee;
+    font-family: monospace;
+    padding: 2rem;
+
   }

@@ -29,7 +29,12 @@ export class UserDetailComponent implements OnInit {
     
 
     createUser(form){
-      if(this.selectedUser.password == this.selectedUser.password_confirmation){
+      if(this.selectedUser.password != null && this.selectedUser.password == this.selectedUser.password_confirmation 
+          && this.selectedUser.username != null
+          && this.selectedUser.email != null
+          && this.selectedUser.nome != null
+          && this.selectedUser.cognome != null
+          && this.selectedUser.clan != null){
         form.value.win = 2;
         form.value.lost = 3;
         form.value.logged = 0;
@@ -45,12 +50,14 @@ export class UserDetailComponent implements OnInit {
         this.apiService.createUser(form.value)
             .subscribe((user: UserInterface)=>{
             console.log("User created, ", user);
+            this.users.push(user);
           });
 
         
+        this.router.navigate(['/users/login']);
         return 'create';
       }
-      else{
+      else{ 
         console.log('Password non coincidenti.')
       }
     }

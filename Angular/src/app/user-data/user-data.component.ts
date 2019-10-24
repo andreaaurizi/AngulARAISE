@@ -31,6 +31,18 @@ export class UserDataComponent implements OnInit {
         }
       }
       console.log(this.user);
+      if(this.user.clan == "guerriero"){
+        document.getElementById("elfo").innerHTML = "";
+        document.getElementById("orco").innerHTML = "";
+      }
+      else if(this.user.clan == "elfo"){
+        document.getElementById("guerriero").innerHTML = "";
+        document.getElementById("orco").innerHTML = "";
+      }
+      else{
+        document.getElementById("guerriero").innerHTML = "";
+        document.getElementById("elfo").innerHTML = "";
+      }
     })
   }
   backToUsers(){
