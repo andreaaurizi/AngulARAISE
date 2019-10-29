@@ -10,13 +10,17 @@ import { UserInterface } from '../interfaces/user';
 export class InfoClanComponent implements OnInit {
   
   
-   
+  clan_users: UserInterface[]= [{ id :  null , username: null, email: null, 
+                                  password : null, nome: null, cognome: null,  
+                                  password_confirmation: null, clan: null, 
+                                  img_profile: null, logged:null, 
+                                  win: null, lost: null, status: null  }];
   users:  UserInterface[];
   logged_user : UserInterface = null;
 
   constructor(private apiService: ApiService) { }
 
-  ngOnInit() {
+  ngOnInit() { //readClassificaUsers
     this.apiService.readUsers().subscribe((users: UserInterface[])=>{
       this.users = users;
       console.log(this.users);
@@ -49,6 +53,18 @@ export class InfoClanComponent implements OnInit {
         document.getElementById("guerriero").innerHTML = "";
         document.getElementById("orco").innerHTML = "";
         document.getElementById("elfo").innerHTML = "";
+      }
+      
+      if(this.logged_user != null){
+        console.log("Porco Dio");
+        for(var i = 0; i < this.users.length; i++){
+          if(this.users[i].clan == this.logged_user.clan){
+            this.clan_users.push(this.users[i]);
+          }
+        }
+        
+        this.users = this.clan_users.slice(1,this.clan_users.length);
+        
       }
     })
   }

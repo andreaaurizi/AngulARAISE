@@ -2,23 +2,23 @@
 <div>
   <br>
   <form #f = "ngForm">
-    <label>Username</label>
+    <label style="font-weight: bold">Username</label>
     <input type="text" name="username" [(ngModel)] = "selectedUser.username">
     <br>
-    <label>Email</label>
+    <label style="font-weight: bold">Email</label>
     <input type="text" name="email" [(ngModel)] = "selectedUser.email">
     <br>
-    <label>Password</label>
+    <label style="font-weight: bold">Password</label>
     <input type="password" name="password" [(ngModel)] = "selectedUser.password">
 
-    <label>Nome</label>
+    <label style="font-weight: bold">Nome</label>
     <input type="text" name="nome" [(ngModel)] = "selectedUser.nome">
     <br>
-    <label>Cognome</label>
+    <label style="font-weight: bold">Cognome</label>
     <input type="text" name="cognome" [(ngModel)] = "selectedUser.cognome">
     <br>
     <br>
-    <label>Status</label>
+    <label style="font-weight: bold">Status</label>
     <input type="text" name="status" [(ngModel)] = "selectedUser.status">
     <br>
     <input type="text" name="logged" [(ngModel)] = "selectedUser.logged" hidden="true">
